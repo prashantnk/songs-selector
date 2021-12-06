@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import useId from "../hooks/useId";
-import { selectSong } from "../actions";
+import { selectSong, selectFavorite } from "../actions";
 
 const SongList = (props) => {
     const getId = useId();
@@ -10,9 +10,13 @@ const SongList = (props) => {
             <div key={getId()} className="item">
                 <div className="right floated content">
                     <button className="ui button primary" onClick={() => props.selectSong(song)}>Select</button>
+                    <button className="ui button" onClick={() => { props.selectFavorite(song) }}>Make Favorite</button>
                 </div>
                 <div className="ui header">
                     {song.title}
+                    <div className="description">
+                        {props.favoriteSong && song.title === props.favoriteSong.title ? "Your Favorite !" : ""}
+                    </div>
                 </div>
             </div>
         );
@@ -24,11 +28,12 @@ const SongList = (props) => {
     );
 }
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        songs: state.songs
+        songs: state.songs,
+        favoriteSong: state.favoriteSong
     };
 }
 export default connect(mapStateToProps, {
-    selectSong
+    selectSong,
+    selectFavorite
 })(SongList);

@@ -15,7 +15,23 @@ const selectSongReducer = (selectedSong = null, action) => {
     return selectedSong;
 }
 
+const favoriteSongReducer = (favoriteSong = null, action) => {
+    if (action.type === 'SELECT_FAVORITE') {
+        return action.payload;
+    }
+    else return favoriteSong;
+};
+
+const counterReducer = (count = 0, action) => {
+    if (action.type === "CHANGE_COUNT") {
+        return count + action.payload;
+    }
+    return count;
+}
+
 export default combineReducers({
     songs: songsReducer,
-    selectedSong: selectSongReducer
+    selectedSong: selectSongReducer,
+    favoriteSong: favoriteSongReducer,
+    count: counterReducer
 });

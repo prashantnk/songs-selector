@@ -7,3 +7,17 @@ export const selectSong = (song) => {
         payload: song
     };
 }
+
+export const selectFavorite = (song) => {
+    return {
+        type: "SELECT_FAVORITE",
+        payload: song
+    };
+}
+
+export const changeCount = (delta) => {
+    return {
+        type: "CHANGE_COUNT",
+        payload: delta
+    };
+}
